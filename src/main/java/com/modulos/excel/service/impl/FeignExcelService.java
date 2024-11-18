@@ -1,10 +1,10 @@
 package com.modulos.excel.service.impl;
 
-import com.modulos.excel.dto.response.FileUploadResponse;
 import com.modulos.excel.entity.CustomerEntity;
 import com.modulos.excel.exception.ReportGenerationException;
 import com.modulos.excel.repository.CustomerRepository;
 import com.modulos.excel.service.FeignReportService;
+import com.modulos.excel.service.GenericExcelService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
@@ -26,6 +26,7 @@ import java.util.List;
 public class FeignExcelService implements FeignReportService {
 
     private final CustomerRepository repository;
+    private final GenericExcelService<CustomerEntity> excelService;
 //    private final StorageServiceClient storageClient;
 
 
@@ -80,6 +81,16 @@ public class FeignExcelService implements FeignReportService {
             log.error("Error generating or uploading report: ", e);
             throw new ReportGenerationException("Failed to generate or upload report", e);
         }
+    }
+
+    @Override
+    public byte[] generateCustomerReport() {
+        List<CustomerEntity> customers = repository.findAll();
+        return excelService.generateReport(
+                customers,
+                CustomerEntity.class,
+                "Reporte de Clientes"
+        );
     }
 
     /**

@@ -28,4 +28,11 @@ public class FeignController {
         byte[] fileUploadResponse = reportService.generateAndUploadReportBytes();
         return ResponseEntity.ok(fileUploadResponse);
     }
+
+    @GetMapping("/customerreportbyte")
+    public ResponseEntity<byte[]> generateCustomerReportBytes() {
+
+        byte[] fileUploadResponse = reportService.generateCustomerReport();
+        return ResponseEntity.ok(fileUploadResponse);
+    }
 }
