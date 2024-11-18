@@ -3,6 +3,7 @@ package com.modulos.excel.controller;
 import com.modulos.excel.service.ReportService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +32,7 @@ public class ReportController {
 
     /** Servicio de generación y recuperación de informes */
     private final ReportService reportService;
+    private final Environment env;
 
     /**
      * Gestiona las peticiones GET para la descarga de informes.
@@ -71,5 +73,15 @@ public class ReportController {
 
         log.info("response: {}", response);
         return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping("props")
+    public ResponseEntity<?> props(){
+        String numero = env.getProperty("numero");
+        String rosa = env.getProperty("rosa");
+        String nombre = env.getProperty("nombre");
+
+        return ResponseEntity.ok(nombre +" "+ rosa +" "+ numero);
     }
 }
