@@ -45,6 +45,10 @@ dependencies {
 	// Bucket
 	implementation 'com.bucket4j:bucket4j-core:8.10.1'
 
+	// https://mvnrepository.com/artifact/org.yaml/snakeyaml
+	implementation group: 'org.yaml', name: 'snakeyaml', version: '2.3'
+
+
 
 
 

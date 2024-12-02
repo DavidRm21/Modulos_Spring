@@ -30,9 +30,9 @@ public class PropertyService {
     @Autowired
     private PropertyValidator propertyValidator;
 
-    @Value("${property.restricted.list}")
-    private List<String> restrictedProperties = Arrays.asList("spring.datasource.password",
-            "spring.security.user.password");
+//    @Value("${property.restricted.list}")
+//    private List<String> restrictedProperties = Arrays.asList("spring.datasource.password",
+//            "spring.security.user.password");
 
     public Map<String, Object> getAllProperties() {
         Map<String, Object> props = new HashMap<>();
@@ -85,8 +85,9 @@ public class PropertyService {
     }
 
     private boolean isRestricted(String propertyName) {
-        return restrictedProperties.stream()
-                .anyMatch(propertyName::startsWith);
+        return false;
+//        return restrictedProperties.stream()
+//                .anyMatch(propertyName::startsWith);
     }
 
     private boolean isNotRestricted(String propertyName) {
